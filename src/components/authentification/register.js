@@ -32,7 +32,7 @@ const Register = ({setUserLoggedIn, users}) => {
             try {
                 dispatch(tryCreateUserAction(values))
                 setUserLoggedIn(values)
-                history.push('/mailbox/:inbox')
+                history.push('/mailbox/inbox')
     
             } catch (error) {
                 console.log(error)
