@@ -11,6 +11,6 @@ const store = createStore(appReducer, composeWithDevTools(applyMiddleware(...mid
 
 if (process.env.NODE_ENV === 'development') {
     console.log('WE ARE IN DEVELOPEMENT ENV')
-}else console.log('WE ARE IN DEVELOPEMENT ENV')
+}else console.log('WE ARE IN PRODUCTION ENV')
 
 export default store
