@@ -1,0 +1,87 @@
+i.fa {
+    cursor: pointer;
+}
+
+ul li {
+    margin-left: 15px;
+}
+div.list-error span{
+    color: red;
+}
+
+span.logout:hover {
+    font-weight: bold;
+}
+
+ul.listbox li {
+    font-size: 14px;
+    margin-left: 0;
+    cursor: pointer;
+}
+
+ul.listbox li:hover {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid gray;
+}
+
+div.mailbox {
+    position: relative;
+}
+
+div.mailbox div.newmail {
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+}
+
+form.form-group .form-control {
+    /* rounded-pill p-4 mr-1 */
+    border-radius: 50px;
+    padding: 25px;
+    margin-top: 5px;
+}
+
+form.form-group button {
+    /* rounded-pill p-4 mr-1 */
+    border-radius: 50px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.newmsg:hover {
+    text-decoration: none;
+    border: 3px solid black;
+}
+
+.seen {
+    background-color: #F5F5F5;
+}
+
+.navlink {
+    text-decoration: none;
+    color: black;
+}
+
+.navbarlink {
+    color: black;
+    padding: 5px;
+    padding-left: 25px;
+}
+
+.navlink:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.activenavbarlink {
+    background-color: #FFE4E1;
+    color: #DC143C !important;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+/* Class new mail */
+
+div.card-header {
+    cursor: pointer;
+}

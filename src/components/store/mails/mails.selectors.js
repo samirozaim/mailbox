@@ -1,0 +1,1 @@
+export const mailsSelector = (state) => state.mails.data
