@@ -9,4 +9,8 @@ const middlewares = [thunk, logger]
 
 const store = createStore(appReducer, composeWithDevTools(applyMiddleware(...middlewares)))
 
+if (process.env.NODE_ENV === 'development') {
+    console.log('WE ARE IN DEVELOPEMENT ENV')
+}else console.log('WE ARE IN DEVELOPEMENT ENV')
+
 export default store

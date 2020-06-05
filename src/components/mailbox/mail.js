@@ -8,6 +8,14 @@ const Mail = ({mailSelected, userLoggedInEmail}) => {
     if(!mailSelected)
         history.push('/mailbox')
 
+    const tryRequire = (path) => {
+        try {
+            return require(`../avatar/${path}`);
+        } catch (err) {
+            return require(`../avatar/default.jpg`);
+        }
+    };
+
     return (
         <>
         {mailSelected && (
@@ -16,7 +24,7 @@ const Mail = ({mailSelected, userLoggedInEmail}) => {
                 <span className='mt-3' style={{fontSize:'22px', marginLeft:'70px'}}>{mailSelected.object}</span>
                 <div className='d-flex flex-row flex-fill mt-4 pr-5'>
                     <div style={{width:'70px'}} className='text-center'>
-                        <img className='rounded-pill' src={require(`../avatar/${mailSelected.transmitter.split('@', 1).join()}.jpg`)} width='50' height='40' alt='img'/>
+                        <img className='rounded-pill' src={tryRequire(`${mailSelected.transmitter.split('@', 1).join()}.jpg`)} width='50' height='40' alt='img'/>
                     </div>
                     <div className='d-flex flex-column flex-fill'>
                         <div className='d-flex justify-content-between'>
