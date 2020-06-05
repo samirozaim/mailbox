@@ -1,7 +1,14 @@
 import axios from 'axios'
 
+let url;
+
+if (process.env.NODE_ENV === 'development')
+    url = 'https://mailbox-93221.firebaseio.com/'
+else 
+    url = 'https://mailbox-prod-27d50.firebaseio.com/'
+
 const apiFirebase = axios.create({
-    baseURL: 'https://mailbox-93221.firebaseio.com/'
+    baseURL: url
 })
 
 export default {
