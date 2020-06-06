@@ -6,7 +6,7 @@ import Login from './components/authentification/login';
 import Register from './components/authentification/register'
 import Home from './components/home/home';
 import './components/style/all.css'
-import MailBox from './components/mailbox';
+import MailBox from './components/mailbox/mailbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUsersAction } from './components/store/actions';
 import { usersSelector } from './components/store/selectors';
@@ -27,10 +27,7 @@ function App() {
 
   useEffect(() => {
       localStorage.setItem('userLoggedIn', JSON.stringify(userLoggedIn))
-      // console.log('LoggedIn user local storage :', JSON.parse(localStorage.getItem('userLoggedIn')))
   }, [userLoggedIn])
-
-  // console.log('userLoggedIn APP *** ', userLoggedIn)
 
   return (
       <div className='d-flex flex-column vh-100'>
@@ -38,7 +35,7 @@ function App() {
         <Switch>
           {userLoggedIn ? (
             <>
-              <Route path='/mailbox/:inbox' component={() => <MailBox userLoggedIn={userLoggedIn} />}/>
+              <Route path='/mailbox/:type' component={() => <MailBox userLoggedIn={userLoggedIn} />}/>
               <Redirect to='/mailbox/inbox' />
             </>
           ) : (

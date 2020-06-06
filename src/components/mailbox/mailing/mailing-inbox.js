@@ -26,7 +26,7 @@ const MailingInbox = ({mails, path, days, userLoggedIn}) => {
                 }} className='navlink'>
                 <li className={ m.seen ? 'list-group-item d-flex seen' : 'list-group-item d-flex'} onClick={ () => dispatch(trySeenMailAction(m.date))}>
                     <span className={'text-capitalize w-25 text-truncate '+(!m.seen && 'font-weight-bold text-capitalize w-25 text-truncate')}>{m.pseudo}</span>
-                    <span className='flex-fill text-truncate mr-5'><i className={!m.seen ? 'font-weight-bold' : undefined}>{m.object}</i> - <span className='text-secondary'>{m.message}</span></span>
+                    <span className='flex-fill mr-5 text-truncate' style={{width:'20px'}}><i className={!m.seen ? 'font-weight-bold' : undefined}>{m.object}</i> - <span className='text-secondary'>{m.message}</span></span>
                     <span>{new Date(m.date).getDay() === new Date().getDay() ? ("0" + new Date(m.date).getHours()).slice(-2) +':'+ ('0'+ new Date(m.date).getMinutes()).slice(-2) : days[new Date(m.date).getDay()] } </span>
                 </li>
                 </NavLink>

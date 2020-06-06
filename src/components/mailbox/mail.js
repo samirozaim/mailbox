@@ -26,7 +26,7 @@ const Mail = ({mailSelected, userLoggedInEmail}) => {
                     <div style={{width:'70px'}} className='text-center'>
                         <img className='rounded-pill' src={tryRequire(`${mailSelected.transmitter.split('@', 1).join()}.jpg`)} width='50' height='40' alt='img'/>
                     </div>
-                    <div className='d-flex flex-column flex-fill'>
+                    <div className='d-flex flex-column flex-fill w-75'>
                         <div className='d-flex justify-content-between'>
                             <div>
                                 <span className='font-weight-bold'> {mailSelected.pseudo.toUpperCase()} </span>

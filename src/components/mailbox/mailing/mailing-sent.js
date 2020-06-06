@@ -22,7 +22,7 @@ const MailingSent = ({mails, path, days, userLoggedIn}) => {
                 }} className='navlink'>
                 <li className='list-group-item d-flex seen' >
                     <span className='text-capitalize w-25 text-truncate'>{m.pseudo}</span>
-                    <span className='flex-fill text-truncate mr-5'><i>{m.object}</i> - <span className='font-weight-light'>{m.message}</span></span>
+                    <span className='flex-fill text-truncate mr-5' style={{width:'20px'}}><i>{m.object}</i> - <span className='font-weight-light'>{m.message}</span></span>
                     <span>{new Date(m.date).getDay() === new Date().getDay() ? ("0" + new Date(m.date).getHours()).slice(-2) +':'+ ('0'+ new Date(m.date).getMinutes()).slice(-2) : days[new Date(m.date).getDay()] } </span>
                 </li>
                 </NavLink>
