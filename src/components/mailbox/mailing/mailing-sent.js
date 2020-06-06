@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 
 const MailingSent = ({mails, path, days, userLoggedIn}) => {
 
-    mails = mails.map(m => m.transmitter === userLoggedIn.email && {...m, pseudo:(m.transmitter.split('@', 1).join()).split('.').join(' ')})
+    mails = mails.map(m => m.transmitter === userLoggedIn.email && {...m, pseudo:(m.recipient.split('@', 1).join()).split('.').join(' ')})
     mails = mails.filter(m => m)
     mails.sort((a, b) => { 
         const dateA = new Date(a.date)
