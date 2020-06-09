@@ -27,7 +27,7 @@ export default (state = {
         case actions.FETCH_USERS_SUCCESS:
             return {
                 ...state,
-                data: action.users ? (action.users.length>1 ? ([...action.users]) : ([action.users])) : ([]),
+                data: action.users ? [...action.users] : [],
                 isLoading: false,
                 error: null
             }
