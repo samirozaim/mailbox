@@ -29,7 +29,7 @@ const Mail = ({mailSelected, userLoggedInEmail}) => {
                     <div className='d-flex flex-column flex-fill w-75'>
                         <div className='d-flex justify-content-between'>
                             <div>
-                                <span className='font-weight-bold'> {mailSelected.pseudo.toUpperCase()} </span>
+                                <span className='font-weight-bold'> {(mailSelected.transmitter.split('@', 1).join()).split('.').join(' ').toUpperCase()} </span>
                                 <span style={{fontSize:'13px'}}> ({mailSelected.transmitter})</span>
                             </div>
                             <span style={{fontSize:'13px'}}>{new Date(mailSelected.date).toLocaleString()}</span>
