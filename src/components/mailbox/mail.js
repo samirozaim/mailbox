@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-const Mail = ({selectedMail, userLoggedInEmail}) => {
+const Mail = ({selectedMail, setSelectedMail, userLoggedInEmail, mailList}) => {
 
     const history = useHistory()
 
@@ -16,6 +16,13 @@ const Mail = ({selectedMail, userLoggedInEmail}) => {
         }
     };
 
+    const mailAfterBefore = (param) => {
+        const index = mailList.indexOf(selectedMail) + param
+
+        if(index>=0 && index<mailList.length)
+            setSelectedMail(mailList[index])
+    }
+
     return (
         <>
         {selectedMail && (
@@ -23,9 +30,9 @@ const Mail = ({selectedMail, userLoggedInEmail}) => {
                 <div className='d-flex justify-content-between p-3 border-bottom'>
                     <i className="fa fa-arrow-left" onClick={() => history.goBack()}></i>
                     <div className='mr-3'>
-                        <label className='mr-4'></label>
-                        <i className="fa fa-angle-left mr-4" title='plus récents' style={{fontSize:'20px'}}></i>
-                        <i className="fa fa-angle-right" title='plus anciens' style={{fontSize:'20px'}}></i>
+                        <label className='mr-4'>{mailList.indexOf(selectedMail)+1} sur {mailList.length}</label>
+                        <i className="fa fa-angle-left mr-4" title='plus récents' onClick={() => mailAfterBefore(-1)} style={{fontSize:'20px'}}></i>
+                        <i className="fa fa-angle-right" title='plus anciens' onClick={() => mailAfterBefore(+1)} style={{fontSize:'20px'}}></i>
                     </div>
                 </div>
                 <span className='mt-3' style={{fontSize:'22px', marginLeft:'70px'}}>{selectedMail.object}</span>

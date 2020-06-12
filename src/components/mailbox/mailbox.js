@@ -14,7 +14,8 @@ const MailBox = ({userLoggedIn}) => {
     const dispatch = useDispatch()
     const mails = useSelector((state) => mailsSelector(state))
 
-    const [selectedMail, setSelectedMail] = useState(null)
+    const [selectedMail, setSelectedMail] = useState()
+    const [mailList, setMailList] = useState()
 
     useEffect(() => {
         dispatch(fetchMailsAction())
@@ -27,8 +28,8 @@ const MailBox = ({userLoggedIn}) => {
         <div className='mailbox d-flex flex-fill'>
             <MailingNavbar mails={mails} userLoggedIn={userLoggedIn} />
             {/* <Route path='/mailbox/:inbox' component={MailingNavbar} /> */}
-            <Route exact path='/mailbox/:type' component={() => <MailingList mails={mails} userLoggedIn={userLoggedIn} setSelectedMail={setSelectedMail} />} />
-            <Route path='/mailbox/:type/mail' component={() => <Mail selectedMail={selectedMail} userLoggedInEmail={userLoggedIn.email} />} />
+            <Route exact path='/mailbox/:type' component={() => <MailingList mails={mails} userLoggedIn={userLoggedIn} setSelectedMail={setSelectedMail} setMailList={setMailList} />} />
+            <Route path='/mailbox/:type/mail' component={() => <Mail selectedMail={selectedMail} setSelectedMail={setSelectedMail} mailList={mailList} userLoggedInEmail={userLoggedIn.email} />} />
             {composer && composer === 'new' ? (<NewMail userLoggedIn={userLoggedIn} />) : null}
             {/* <Route path='/mailbox/:type' component={() => <NewMail userLoggedIn={userLoggedIn} />} /> */}
             {/* <Route path='/mailbox/:type/' component={NewMail} /> */}

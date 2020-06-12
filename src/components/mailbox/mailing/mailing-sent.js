@@ -1,23 +1,23 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
-const MailingSent = ({mails, path, GenerateDateMail, userLoggedIn, setSelectedMail}) => {
+const MailingSent = ({mails, path, GenerateDateMail, userLoggedIn, setSelectedMail, setMailList}) => {
 
-    mails = mails.map(m => m.transmitter === userLoggedIn.email && {...m, pseudo:(m.recipient.split('@', 1).join()).split('.').join(' ')})
-    mails = mails.filter(m => m)
-    mails.sort((a, b) => { 
-        const dateA = new Date(a.date)
-        const dateB = new Date(b.date)
-        if(dateA < dateB) return 1
-        if(dateA > dateB) return -1
-        else return 0
-     })
+    const mailList = mails.map(m => m.transmitter === userLoggedIn.email && {...m, pseudo:(m.recipient.split('@', 1).join()).split('.').join(' ')})
+                          .filter(m => m)
+                          .sort((a, b) => { 
+                            const dateA = new Date(a.date)
+                            const dateB = new Date(b.date)
+                            if(dateA < dateB) return 1
+                            if(dateA > dateB) return -1
+                            else return 0
+                          })
      
     return (
         <ul className="list-group w-100 listbox">
-            { mails && mails.length>0 ? (mails.map((m, index) => (
+            { mailList && mailList.length>0 ? (mailList.map((m, index) => (
                 <NavLink key={index} to={path+'/mail'} className='navlink'>
-                <li className='list-group-item d-flex seen' onClick={() => setSelectedMail(m)}>
+                <li className='list-group-item d-flex seen' onClick={() => {setSelectedMail(m); setMailList(mailList)}}>
                     <span className='text-capitalize w-25 text-truncate'>{m.pseudo}</span>
                     <span className='flex-fill text-truncate mr-5' style={{width:'20px'}}><i>{m.object}</i> - <span className='font-weight-light'>{m.message}</span></span>
                     <span>{<GenerateDateMail date={new Date(m.date)}/>}</span>
