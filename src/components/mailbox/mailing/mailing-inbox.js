@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { trySeenMailAction } from '../../store/actions'
 
-const MailingInbox = ({mails, path, days, userLoggedIn}) => {
+const MailingInbox = ({mails, path, GenerateDateMail, userLoggedIn, setSelectedMail}) => {
 
     const dispatch = useDispatch()
 
@@ -16,18 +16,20 @@ const MailingInbox = ({mails, path, days, userLoggedIn}) => {
         if(dateA > dateB) return -1
         else return 0
      })
-     
+
+    const viewSelectedMail = (selectedMail) => {
+        dispatch(trySeenMailAction(selectedMail.date))
+        setSelectedMail(selectedMail)
+    }
+
     return (
         <ul className="list-group w-100 listbox">
             { mails && mails.length>0 ? (mails.map((m, index) => (
-                <NavLink key={index} to={{
-                    pathname: path+'/mail',
-                    mailSelected:m
-                }} className='navlink'>
-                <li className={ m.seen ? 'list-group-item d-flex seen' : 'list-group-item d-flex'} onClick={ () => dispatch(trySeenMailAction(m.date))}>
+                <NavLink key={index} to={path+'/mail'} className='navlink'>
+                <li className={ m.seen ? 'list-group-item d-flex seen' : 'list-group-item d-flex'} onClick={ () => viewSelectedMail(m)}>
                     <span className={'text-capitalize w-25 text-truncate '+(!m.seen && 'font-weight-bold text-capitalize w-25 text-truncate')}>{m.pseudo}</span>
                     <span className='flex-fill mr-5 text-truncate' style={{width:'20px'}}><i className={!m.seen ? 'font-weight-bold' : undefined}>{m.object}</i> - <span className='text-secondary'>{m.message}</span></span>
-                    <span>{new Date(m.date).getDay() === new Date().getDay() ? ("0" + new Date(m.date).getHours()).slice(-2) +':'+ ('0'+ new Date(m.date).getMinutes()).slice(-2) : days[new Date(m.date).getDay()] } </span>
+                    <span>{<GenerateDateMail date={new Date(m.date)}/>}</span>
                 </li>
                 </NavLink>
             ))) : (

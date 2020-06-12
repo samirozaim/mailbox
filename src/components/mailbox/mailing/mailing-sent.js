@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
-const MailingSent = ({mails, path, days, userLoggedIn}) => {
+const MailingSent = ({mails, path, GenerateDateMail, userLoggedIn, setSelectedMail}) => {
 
     mails = mails.map(m => m.transmitter === userLoggedIn.email && {...m, pseudo:(m.recipient.split('@', 1).join()).split('.').join(' ')})
     mails = mails.filter(m => m)
@@ -16,14 +16,11 @@ const MailingSent = ({mails, path, days, userLoggedIn}) => {
     return (
         <ul className="list-group w-100 listbox">
             { mails && mails.length>0 ? (mails.map((m, index) => (
-                <NavLink key={index} to={{
-                    pathname: path+'/mail',
-                    mailSelected:m
-                }} className='navlink'>
-                <li className='list-group-item d-flex seen' >
+                <NavLink key={index} to={path+'/mail'} className='navlink'>
+                <li className='list-group-item d-flex seen' onClick={() => setSelectedMail(m)}>
                     <span className='text-capitalize w-25 text-truncate'>{m.pseudo}</span>
                     <span className='flex-fill text-truncate mr-5' style={{width:'20px'}}><i>{m.object}</i> - <span className='font-weight-light'>{m.message}</span></span>
-                    <span>{new Date(m.date).getDay() === new Date().getDay() ? ("0" + new Date(m.date).getHours()).slice(-2) +':'+ ('0'+ new Date(m.date).getMinutes()).slice(-2) : days[new Date(m.date).getDay()] } </span>
+                    <span>{<GenerateDateMail date={new Date(m.date)}/>}</span>
                 </li>
                 </NavLink>
             ))) : (

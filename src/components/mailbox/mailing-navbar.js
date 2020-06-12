@@ -9,8 +9,6 @@ const MailingNavbar = ({mails, userLoggedIn}) => {
     const location = useLocation()
     const path = location.pathname
 
-    console.log('path mailing navbar :', location)
-
     return (
         <div className='d-flex flex-column py-3 pr-3' style={{minWidth:'268px'}}>
             <NavLink to={`${path}?composer=new`} className='newmsg border text-center ml-2 mt-1 p-3 mb-5 w-100 rounded-pill text-dark shadow-sm'><i className="fa fa-plus"></i> Nouveau message</NavLink>
