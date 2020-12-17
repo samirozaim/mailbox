@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import MailDetails from './mailing/pop-up/mail-details'
 
 const Mail = ({selectedMail, setSelectedMail, userLoggedInEmail, mailList}) => {
 
     const history = useHistory()
+    const [showDetails, setShowDetails] = useState(false)
 
     if(!selectedMail)
         history.push('/mailbox')
@@ -21,6 +23,10 @@ const Mail = ({selectedMail, setSelectedMail, userLoggedInEmail, mailList}) => {
 
         if(index>=0 && index<mailList.length)
             setSelectedMail(mailList[index])
+    }
+
+    const transmittersName = (transmitter) => {
+       return (transmitter.split('@', 1).join()).split('.').join(' ').toUpperCase()
     }
 
     return (
@@ -43,12 +49,16 @@ const Mail = ({selectedMail, setSelectedMail, userLoggedInEmail, mailList}) => {
                     <div className='d-flex flex-column flex-fill w-75'>
                         <div className='d-flex justify-content-between'>
                             <div>
-                                <span className='font-weight-bold'> {(selectedMail.transmitter.split('@', 1).join()).split('.').join(' ').toUpperCase()} </span>
+                                <span className='font-weight-bold'> {transmittersName(selectedMail.transmitter)} </span>
                                 <span style={{fontSize:'13px'}}> ({selectedMail.transmitter})</span>
                             </div>
                             <span style={{fontSize:'13px'}}>{new Date(selectedMail.date).toLocaleString()}</span>
                         </div>
-                        <span style={{fontSize:'13px'}}>À <i className='text-capitalize'>{!(selectedMail.recipient === userLoggedInEmail) ? selectedMail.recipient.split('.', 1).join() : 'moi'}</i></span>
+                        <span style={{fontSize:'13px'}}>
+                            À <i className='text-capitalize'>{!(selectedMail.recipient === userLoggedInEmail) ? selectedMail.recipient.split('.', 1).join() : 'moi'}</i>
+                            <i className={"text-secondary ml-2 " + (showDetails ? "fa fa-caret-up" : "fa fa-caret-down")} onClick={() => setShowDetails(!showDetails)}></i>
+                            {showDetails ? <MailDetails selectedMail = {selectedMail} transmittersName={transmittersName}/> : false}
+                        </span>
                         <div className='mt-5' style={{whiteSpace:'pre-line'}}>{selectedMail.message}</div>
                     </div>
                 </div>

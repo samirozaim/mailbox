@@ -85,3 +85,9 @@ form.form-group button {
 div.card-header {
     cursor: pointer;
 }
+
+/* Class mail details */
+
+div.container{
+    width: 35%;
+}
